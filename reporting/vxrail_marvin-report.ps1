@@ -10,37 +10,38 @@ Email:			    christian@kremer.systems
 
 
 import-module VxRail.API
-$params = @{
-    vxrm = ''
-    user = ''
-    pass = ''
+$marvinparams = @{
+	# vxrail manager ip
+	Server = 'xxx.xxx.xxx.xxx'
+	# administrator@vsphere.local
+	Username = '@vsphere.local'
+	# administrator@vsphere.local password
+	Password = 'PASSWORD'
+
 }
 
+Function Get-Marvin {
 
-Function Get-marvin {
-
- param(
-	[CmdletBinding(SupportsShouldProcess = $False)]
-	[parameter(Mandatory = $true, HelpMessage = "vxrail manager ip address")]
-	[ValidateNotNullorEmpty()]
-	[string] $vxrm,
-	[parameter(Mandatory = $true, HelpMessage = "@vsphere.local admin")]
-	[ValidateNotNullorEmpty()]
-	[string] $user,
-	[parameter(Mandatory = $true, HelpMessage = "@vsphere.local admin password")]
-	[ValidateNotNullorEmpty()]
-	[string] $pass
+	param (
+		[CmdletBinding(SupportsShouldProcess = $False)]
+		[parameter(Mandatory = $true, HelpMessage = 'marvinparameters')]
+		[ValidateNotNullorEmpty()]
+		[hashtable] $marvinparameters
 		
-)
+	)
+	if ('' -eq "$($marvinparameters.Server)" -or '' -eq "$($marvinparameters.Username)" -or '' -eq "$($marvinparameters.Password)") {
+		Write-Host "Please check your parameters:"
+		$marvinparameters
+		return
+	}
 
-    Get-SystemInfo -Server $vxrm -Username $user -Password $pass | Select-Object "version","number_of_host","cluster_type","is_external_vc" | FT
-    Get-Cluster -Server $vxrm -Username $user -Password $pass | Select-Object "Cluster_ID","product_type","health","operational_status" | FT
-    Get-SystemClusterHosts -Server $vxrm -Username $user -Password $pass | Select-Object "host_name","appliance_id","psnt","serial_number","model","health","missing" | FT
-    Get-VCenterMode -Server $vxrm -Username $user -Password $pass | FT
-    Get-SupportContact -Server $vxrm -Username $user -Password $pass | Select-Object "email","company","site_id" | FT  
-
+     Get-SystemInfo @marvinparameters | Select-Object 'version', 'number_of_host', 'cluster_type', 'is_external_vc' | Format-Table
+	 Get-Cluster @marvinparameters | Select-Object 'Cluster_ID', 'product_type', 'health', 'operational_status' | Format-Table
+	 Get-SystemClusterHosts @marvinparameters | Select-Object 'host_name', 'appliance_id', 'psnt', 'serial_number', 'model', 'health', 'missing' | Format-Table
+	 Get-VCenterMode @marvinparameters | Format-Table
+	 Get-SupportContact @marvinparameters | Select-Object 'email', 'company', 'site_id' | Format-Table
 }
 
-Get-marvin @params
+Get-Marvin -marvinparameters $marvinparams
 
 

@@ -11,17 +11,15 @@ Email:			    christian@kremer.systems
 
 import-module VxRail.API
 $marvinparams = @{
-	#vxrail manager ip
-	Server = ''
-	# administrator@vsphere.local
-	Username = ''
-	# password administrator@vsphere.local
-	Password = ''
+	#vxrail manager ip address
+	Server = 'xxx.xxx.xxx.xxx'
+	Username = '@vsphere.local'
+	Password = 'PASSWORD'
 }
 
 $teamsparams = @{
-	#Teams webhook uri
-	URI         = ''
+	#Teams weebhook uri
+	URI         = 'URI'
 	Method      = 'POST'
 	ContentType = 'application/json'
 }
