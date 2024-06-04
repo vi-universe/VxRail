@@ -19,9 +19,50 @@ For VxVerify troubleshooting, see article:
 Note: Tests marked with a * are in draft mode (no warnings or failures
   should be returned), to be fully released at a later date.
 From the x.40.105 release onwards, changes listed under each x.40 release
-  will not apply to VxVerify2, but will apply to both VxVerify 3 and 4.
+  will apply to both VxVerify 3 and 4, but not VxVerify2.
 
 Recent changes:
+x.40.524 (expiry date: 2024 Jun 16)
+Create VxVerify minion4 for 8.0.300+ (VXV-1013)
+New versions of VxVerify minion3 for ESXi 7.0.200+ will only be compiled for Python 3.8 (VXV-1013)
+VxVerify minion3 for ESXi below 7.0.200, compiled on Python 3.5, will be frozen at version 3.30.503 (VXV-1013)
+Add workaround for DCmanager Python libraries causing X509 errors when starting VxVerify (VXV-1014)
+* Test 'privileges' has been updated to check VxRail release 7.0.510 and above (VXV-1014)
+
+x.40.510 (expiry date: 2024 Jun 02)
+VxVerify and VCFVerify code modified to address security vulnerabilities highlighted by CheckMarx (VXV-1012)
+
+x.40.503 (expiry date: 2024 May 26)
+Added 'witness' test response for 2 node clusters with external witness (VXV-1006)
+Mapping VM-UUID file option, for use with VxStat, added to vxverify.sh menu (VXV-996)
+VxRail cluster Deployment-type added to VxTii report (VXV-1006)
+VxRail management account password checks updated (VXV-1010)
+Test 'hostd' updated to check for failing localcli commands (VXV-1009)
+* Test 'vibsig' has revised criteria for untrusted and unsigned VIB (VXV-1011)
+
+2.40.503 (expiry 2025 Apr 11)
+VxVerify2 is no longer being developed, so this version will not expire until 2025 (VXV-1008)
+VxVerify2 updated to use the same password prompts as VxVerify3 (VXV-1008)
+
+x.40.426 (expiry date: 2024 May 19)
+Test 'lcm_state' has event added for REST API timeout (VXV-1007)
+Test 'sso_admin' has new KB article for an invalid user or password (KB 224236 & VXV-1005)
+Help text option added to VxVerify Shell script (VXV-1005)
+
+x.40.419 (expiry date: 2024 May 12)
+Fixed host minion results JSON file not being found for some non-vSAN nodes (VXV-1004)
+
+x.40.412 (expiry date: 2024 May 05)
+VxVerify minion critical and expiry errors will be listed for each host and will reference the log file name (VXV-1000)
+Test 'pfx_vxm' cryptography updated for improved Python 3.11 compatibility (VXV-995)
+Adding 'db_host' test event to give detail for DO-host errors (VXV-1000)
+
+x.40.405 (expiry date: 2024 Apr 27)
+Credentials input moved from VxVerify Shell script into Python with improved error handling (VXV-996)
+Test 'sso_admin' will report failures for rejected vSphere SSO credentials, if these are supplied (VXV-996)
+Shell script vxverify.sh will determine which Python to use and will contain VxVerify 2, 3 & 4 in the same bundle (VXV-966)
+Test profile name, instead of the number, will be displayed when VxVerify starts (VXV-999)
+
 x.40.322 (expiry date: 2024 Apr 14)
 Test 'gpuhw' modified to only warn when GPU is present for Core upgrade profiles. The VxTii header reports GPU presence in all profiles (VXV-994)
 Test 'maint_mode' updated to include the vSAN evacuation outcome prediction (VXV-753)
@@ -38,6 +79,7 @@ x.40.308 (expiry date: 2024 Mar 31)
 Test 'vs_util' will not report failures for the post-upgrade test profiles (VXV-987)
 Test 'qedentv' is no longer required and is being removed from the host minion (VXV-989)
 VxTii report for each node will include an evacuation check listing the data to move and the objects at risk (VXV-753)
+Shell script vxverify.sh determines which Python to use and contains VxVerify 2, 3 & 4 in the same bundle (VXV-966)
 
 x.40.223 (expiry date: 2024 Mar 16)
 Test 'firewall' modified to only apply to upgrades to under VxRail 8.0.200 (VXV-986)
@@ -227,7 +269,7 @@ Test 'lacp_dvs' amended to not apply to LACP on upgrades to 7.0.451 (VXV-842)
 Test 'vxnode' fixed local variable error which could lead to a py_crash event (VXV-859)
 Updated dell_node function updated to cope with more VxRail models, including 16G nodes (VXV-869)
 DO-host query updated to find the node type, rather than querying the node during the ism_check function (VXV-868)
-* Test 'vc_vhc' updated to check only test from must_be_green list and expanded ix to distinguish red/yellow/other (VXV-822)
+Test 'vc_vhc' updated to check only test from must_be_green list and expanded ix to distinguish red/yellow/other (VXV-822)
 
 x.30.526 (expiry date: 2023 Jun 17)
 Test 'lacp_dvs' added to check for LACP on upgrades to 7.0.450 (VXV-842)
